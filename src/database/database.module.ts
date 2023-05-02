@@ -15,8 +15,8 @@ import { Annotation } from 'src/annotation/entities/annotation.entity'
 				url: configService.get('DATABASE_URL'),
 				// entities: [__dirname + '/../**/*.entity.ts'],
 				entities: [Person, Address, Annotation],
-				ssl: { rejectUnauthorized: true },
-				logging: true
+				ssl: { rejectUnauthorized: true }
+				// logging: true
 				// synchronize: true
 			})
 		})
