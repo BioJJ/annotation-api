@@ -1,0 +1,28 @@
+import { IsNotEmpty, IsEmail, Matches } from 'class-validator'
+import { MessagesHelper } from 'src/helpers/messages.helper'
+import { RegExHelper } from 'src/helpers/regex.helper'
+
+export class CreatePersonDto {
+	@IsNotEmpty()
+	name: string
+
+	@IsNotEmpty()
+	@IsEmail()
+	email: string
+
+	@Matches(RegExHelper.password, { message: MessagesHelper.PASSWORD_VALID })
+	@IsNotEmpty()
+	password: string
+
+	@IsNotEmpty()
+	motherName: string
+
+	@IsNotEmpty()
+	fatherName: string
+
+	@IsNotEmpty()
+	cep: string
+
+	@IsNotEmpty()
+	dateBirth: string
+}
