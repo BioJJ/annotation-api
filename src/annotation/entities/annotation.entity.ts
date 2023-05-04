@@ -43,8 +43,7 @@ export class Annotation {
 
 	@DeleteDateColumn({
 		type: 'timestamp',
-		name: 'deleted_at',
-		default: () => 'CURRENT_TIMESTAMP(6)'
+		name: 'deleted_at'
 	})
 	deletedAt: Date
 }

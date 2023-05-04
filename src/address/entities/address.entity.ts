@@ -6,7 +6,8 @@ import {
 	Entity,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
-	OneToMany
+	OneToMany,
+	JoinColumn
 } from 'typeorm'
 
 @Entity()
@@ -52,8 +53,7 @@ export class Address {
 
 	@DeleteDateColumn({
 		type: 'timestamp',
-		name: 'deleted_at',
-		default: () => 'CURRENT_TIMESTAMP(6)'
+		name: 'deleted_at'
 	})
 	deletedAt: Date
 }

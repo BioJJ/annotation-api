@@ -9,7 +9,8 @@ import {
 	UpdateDateColumn,
 	ManyToOne,
 	OneToMany,
-	BeforeInsert
+	BeforeInsert,
+	JoinColumn
 } from 'typeorm'
 import { hashSync } from 'bcrypt'
 
@@ -62,8 +63,7 @@ export class Person {
 
 	@DeleteDateColumn({
 		type: 'timestamp',
-		name: 'deleted_at',
-		default: () => 'CURRENT_TIMESTAMP(6)'
+		name: 'deleted_at'
 	})
 	deletedAt: Date
 
