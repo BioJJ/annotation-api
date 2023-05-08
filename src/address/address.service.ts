@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { CreateAddressDto } from './dto/create-address.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
@@ -48,24 +48,23 @@ export class AddressService {
 			}
 		}
 
-		const response = await lastValueFrom(this.httpService.get(url, config))
-
-		if (response.status === 200) {
-			return response.data
-			// this.extractCepValuesFromResponse(response.data)
-		}
-		// .then(this.analyzeAndParseResponse)
+		// const response =
+		return await lastValueFrom(this.httpService.get(url, config))
+			// if (response.status === 200) {
+			// 	return response.data
+			// }
+			.then(this.analyzeAndParseResponse)
 		// .then(this.checkForViaCepError)
 		// .then(this.extractCepValuesFromResponse)
 		// .catch(this.throwApplicationError)
 	}
 
 	analyzeAndParseResponse(response) {
-		if (response) {
+		if (response.status === 200) {
 			return response.data
 		}
 
-		throw Error('Erro ao se conectar com o serviço ViaCEP.')
+		throw new NotFoundException('Erro ao se conectar com o serviço ViaCEP.')
 	}
 
 	checkForViaCepError(responseObject) {
