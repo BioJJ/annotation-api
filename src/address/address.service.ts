@@ -18,6 +18,27 @@ export class AddressService {
 		return await this.repository.save(address)
 	}
 
+	async save(cepWithLeftPad: string): Promise<Address> {
+		const address: any = this.repository.create(
+			await this.fetchViaCepService(cepWithLeftPad)
+		)
+		return await this.repository.save(address)
+	}
+
+	async findAll(): Promise<Address[]> {
+		return await this.repository.find({
+			select: [
+				'id',
+				'cep',
+				'logradouro',
+				'complemento',
+				'bairro',
+				'localidade',
+				'uf'
+			]
+		})
+	}
+
 	async fetchViaCepService(cepWithLeftPad: string): Promise<any> {
 		const url = `https://viacep.com.br/ws/${cepWithLeftPad}/json/`
 
